@@ -30,3 +30,5 @@
      jdbc.driver=com.mysql.cj.jdbc.Driver
      jdbc.url=jdbc:sqlite:test.db
    #+END_SRC
+
+4. 编写 JdbcUtils 类以及测试类
