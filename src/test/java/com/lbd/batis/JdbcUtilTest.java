@@ -1,4 +1,4 @@
-package com.lbd.batis.utils;
+package com.lbd.batis;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,10 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.lbd.batis.utils.JdbcUtil;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 
 
 public class JdbcUtilTest {
