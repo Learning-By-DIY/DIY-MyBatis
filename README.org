@@ -3,8 +3,8 @@
 
 
 * 计划
-- [ ] 项目初始化
-- [ ] JDBC 相关工具的编写
+- [ ] 项目初始化以及 JdbcUtil 工具类的编写
+- [ ] Executor 工具：query 函数的实现
 - [ ] 基本 select 实现
 - [ ] insert、update、delete 语句实现
 - [ ] 使用注解模式进行解析
