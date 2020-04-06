@@ -1,0 +1,32 @@
+#+TITLE: 第一天
+#+SETUPFILE: ~/.doom.d/org-templates/level-0.org
+
+
+项目初始化的主要工作：
+
+1. 新建 pom.xml 文件
+
+2. 创建数据库以及表
+  
+   #+BEGIN_SRC sh
+     sqlite3 src/test/resources/test.sqlite.db < src/test/resources/init.sql
+   #+END_SRC
+
+   进入数据库的命令：
+
+   #+BEGIN_SRC sh
+     sqlite3 src/test/resources/test.sqlite.db
+   #+END_SRC
+
+   可以通过下面的命令来查看创建表的 sql 语句：
+
+   #+BEGIN_SRC sql
+     SELECT sql FROM sqlite_master;
+   #+END_SRC
+
+3. 新增配置文件，配置文件中主要存放的是 jdbc 的 drive、url 等：
+
+   #+BEGIN_SRC conf
+     jdbc.driver=com.mysql.cj.jdbc.Driver
+     jdbc.url=jdbc:sqlite:test.db
+   #+END_SRC

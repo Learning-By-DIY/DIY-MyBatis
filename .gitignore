@@ -29,4 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
-.idea/
+
+## test database file
+*.sqlite.db
