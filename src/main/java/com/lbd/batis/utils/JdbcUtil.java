@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.lbd.batis.constants.Constant;
+
 
 public class JdbcUtil {
 
@@ -23,16 +25,16 @@ public class JdbcUtil {
 
     public static void loadConfig() {
         try {
-            InputStream inStream = JdbcUtil.class.getResourceAsStream("/jdbc.properties");
+            InputStream inStream = JdbcUtil.class.getResourceAsStream(Constant.CONFIG_FILE_LOCATION);
             Properties prop = new Properties();
             prop.load(inStream);
 
-            driver = prop.getProperty("jdbc.driver");
-            url = prop.getProperty("jdbc.url");
+            driver = prop.getProperty(Constant.JDBC_DRIVER);
+            url = prop.getProperty(Constant.JDBC_URL);
 
-            if (prop.contains("jdbc.username")) {
-                username = prop.getProperty("jdbc.username");
-                password = prop.getProperty("jdbc.password");
+            if (prop.contains(Constant.JDBC_USERNAME)) {
+                username = prop.getProperty(Constant.JDBC_USERNAME);
+                password = prop.getProperty(Constant.JDBC_PASSWORD);
             }
         } catch (Exception e) {
             throw new RuntimeException("read jdbc.properties exception", e);
