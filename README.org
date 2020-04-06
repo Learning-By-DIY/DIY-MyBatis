@@ -1,0 +1,15 @@
+#+TITLE: DIY-MyBatis
+#+SETUPFILE: ~/.doom.d/org-templates/level-0.org
+
+
+* 计划
+- [ ] 项目初始化
+- [ ] JDBC 相关工具的编写
+- [ ] 基本 select 实现
+- [ ] insert、update、delete 语句实现
+- [ ] 使用注解模式进行解析
+- [ ] 增加 XML 解析
+- [ ] 插件机制
+- [ ] 缓存机制 —— 查找缓存
+- [ ] 缓存机制 —— 缓存的操作
+- [ ] 最终总结
