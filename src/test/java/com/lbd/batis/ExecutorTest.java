@@ -10,15 +10,15 @@ import org.junit.jupiter.api.Test;
 
 public class ExecutorTest extends BaseTest {
 
-  @Test
-  public void testQuery()
-    throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-    MappedStatement ms = new MappedStatement();
-    ms.setSql("select id, name, age, password from user where id = #{id}");
+    @Test
+    public void testQuery()
+        throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        MappedStatement ms = new MappedStatement();
+        ms.setSql("select id, name, age, password from user where id = #{id}");
 
-    String[] params = {"1"};
+        String[] params = {"1"};
 
-    Executor executor = new SimpleExecutor();
-    executor.doQuery(ms, params);
-  }
+        Executor executor = new SimpleExecutor();
+        executor.doQuery(ms, params);
+    }
 }
