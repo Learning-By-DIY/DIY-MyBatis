@@ -21,7 +21,8 @@ import com.lbd.batis.utils.JdbcUtil;
 public class SimpleExecutor implements Executor {
 
     @Override
-    public <E> List<E> doQuery(MappedStatement ms, Object parameter) throws SQLException {
+    public <E> List<E> doQuery(MappedStatement ms, Object parameter)
+        throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Connection conn = null;
 
         try {

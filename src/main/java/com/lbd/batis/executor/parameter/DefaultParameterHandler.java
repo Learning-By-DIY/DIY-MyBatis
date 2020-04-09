@@ -14,15 +14,17 @@ public class DefaultParameterHandler implements ParameterHandler {
 
     @Override
     public void setParameters(PreparedStatement paramPreparedStatement) {
-        if (parameter != null) {
-            if (parameter.getClass().isArray()) {
-                Object[] params = (Object[]) parameter;
-                for (int i = 0; i < params.length; ++i) {
-                    try {
-                        paramPreparedStatement.setObject(i + 1, params[i]);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+        if (parameter == null) {
+            return;
+        }
+
+        if (parameter.getClass().isArray()) {
+            Object[] params = (Object[]) parameter;
+            for (int i = 0; i < params.length; ++i) {
+                try {
+                    paramPreparedStatement.setObject(i + 1, params[i]);
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
