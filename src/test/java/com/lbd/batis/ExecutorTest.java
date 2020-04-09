@@ -8,11 +8,15 @@ import com.lbd.batis.mapping.MappedStatement;
 
 import org.junit.jupiter.api.Test;
 
-public class ExecutorTest extends BaseTest {
 
+public class ExecutorTest extends BaseTest {
   @Test
   public void testQuery()
     throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+    this.init();
+    this.insertInit();
+
     MappedStatement ms = new MappedStatement();
     ms.setSql("select id, name, age, password from user where id = #{id}");
 

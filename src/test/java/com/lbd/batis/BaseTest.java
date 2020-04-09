@@ -16,6 +16,7 @@ public class BaseTest {
 
   @BeforeEach
   public void init() throws SQLException {
+    System.out.println("Getting init");
     String createSql = "CREATE TABLE user (" +
       "id INT NOT NULL, " +
       "name VARCHAR (20) NOT NULL, " +
