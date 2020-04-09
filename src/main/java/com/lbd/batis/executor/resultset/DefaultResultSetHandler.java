@@ -52,6 +52,14 @@ public class DefaultResultSetHandler implements ResultSetHandler {
 
         if (int.class.equals(fieldType) || Integer.class.equals(fieldType)) {
             return resultSet.getInt(field.getName());
+        } else if (long.class.equals(fieldType) || Long.class.equals(fieldType)) {
+            return resultSet.getLong(field.getName());
+        } else if (float.class.equals(fieldType) || Float.class.equals(fieldType)) {
+            return resultSet.getFloat(field.getName());
+        } else if (double.class.equals(fieldType) || Double.class.equals(fieldType)) {
+            return resultSet.getDouble(field.getName());
+        } else if (boolean.class.equals(fieldType) || Boolean.class.equals(fieldType)) {
+            return resultSet.getBoolean(field.getName());
         }
 
         return resultSet.getString(field.getName());
