@@ -41,5 +41,7 @@ public class JdbcUtilTest {
         Assertions.assertEquals("hanzejl", (String) resultSet.getObject("name"));
         Assertions.assertEquals(20, (int) resultSet.getObject("age"));
         Assertions.assertEquals("12345678", (String) resultSet.getObject("password"));
+
+        JdbcUtil.release(conn);
     }
 }
