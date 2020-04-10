@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import com.lbd.batis.executor.Executor;
@@ -21,7 +22,8 @@ import com.lbd.batis.utils.JdbcUtil;
 public class SimpleExecutor implements Executor {
 
     @Override
-    public <E> List<E> doQuery(MappedStatement ms, Object parameter)
+    public <E> List<E> doQuery(MappedStatement ms,
+                               HashMap<String, Object> parameter)
         throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Connection conn = null;
 
@@ -32,7 +34,7 @@ public class SimpleExecutor implements Executor {
 
             PreparedStatement preparedStatement = statementHandler.prepare(conn);
 
-            ParameterHandler parameterHandler = new DefaultParameterHandler(parameter);
+            ParameterHandler parameterHandler = new DefaultParameterHandler(ms, parameter);
             parameterHandler.setParameters(preparedStatement);
 
             ResultSet resultSet = statementHandler.query(preparedStatement);

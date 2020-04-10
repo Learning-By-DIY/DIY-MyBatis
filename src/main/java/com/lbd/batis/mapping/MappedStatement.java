@@ -21,4 +21,8 @@ public class MappedStatement {
     private SqlType sqlCommandType;
 
     private HashMap<String, List<Integer>> params;
+
+    public void setSql(String sql) {
+        this.sql = sql;
+    }
 }

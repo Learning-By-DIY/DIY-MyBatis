@@ -24,6 +24,8 @@ public class SimpleStatementHandler implements StatementHandler {
     public PreparedStatement prepare(Connection connection) throws SQLException {
         String originSql = mappedStatement.getSql();
 
+        System.out.println("format sql is " + parseSymbol(originSql));
+
         if (CommonUtils.isNotEmpty(originSql)) {
             return connection.prepareStatement(parseSymbol(originSql));
         } else {
