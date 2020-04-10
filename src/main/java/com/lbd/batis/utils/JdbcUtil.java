@@ -71,4 +71,13 @@ public class JdbcUtil {
             }
         }
     }
+
+    public static Connection getConnectionWithoutException() {
+        try {
+            return getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
