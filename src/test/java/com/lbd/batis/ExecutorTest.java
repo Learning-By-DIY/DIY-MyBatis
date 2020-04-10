@@ -1,6 +1,7 @@
 package com.lbd.batis;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import com.lbd.batis.dao.User;
@@ -34,7 +35,8 @@ public class ExecutorTest extends BaseTest {
         ms.setSql("select id, name, age, password from user where id = #{id}");
         ms.setResultType("com.lbd.batis.dao.User");
 
-        String[] params = {"1"};
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("id", "1");
 
         Executor executor = new SimpleExecutor();
         List<User> users = executor.doQuery(ms, params);

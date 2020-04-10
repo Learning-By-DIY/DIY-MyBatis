@@ -14,29 +14,19 @@ import com.lbd.batis.utils.CommonUtils;
 public class SimpleStatementHandler implements StatementHandler {
     private MappedStatement mappedStatement;
 
-    private static Pattern paramPattern = Pattern.compile("#\\{([^\\{\\}]*)\\}");
-
     public SimpleStatementHandler(MappedStatement mappedStatement) {
         this.mappedStatement = mappedStatement;
     }
 
     @Override
     public PreparedStatement prepare(Connection connection) throws SQLException {
-        String originSql = mappedStatement.getSql();
+        String sql = mappedStatement.getSql();
 
-        System.out.println("format sql is " + parseSymbol(originSql));
-
-        if (CommonUtils.isNotEmpty(originSql)) {
-            return connection.prepareStatement(parseSymbol(originSql));
+        if (CommonUtils.isNotEmpty(sql)) {
+            return connection.prepareStatement(sql);
         } else {
             throw new SQLException("original sql is numm");
         }
-    }
-
-    private String parseSymbol(String source) {
-        source = source.trim();
-        Matcher matcher = paramPattern.matcher(source);
-        return matcher.replaceAll("?");
     }
 
     @Override
