@@ -1,4 +1,4 @@
-package com.lbd.batis.session.defalts;
+package com.lbd.batis.session.defaults;
 
 import com.lbd.batis.session.SqlSession;
 import com.lbd.batis.session.SqlSessionFactory;
