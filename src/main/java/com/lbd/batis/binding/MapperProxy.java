@@ -13,6 +13,7 @@ import java.util.Map;
 import com.lbd.batis.annotation.Param;
 import com.lbd.batis.mapping.MappedStatement;
 import com.lbd.batis.session.SqlSession;
+import com.lbd.batis.utils.CommonUtils;
 
 
 
@@ -37,6 +38,10 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     }
 
     private Map<String, Object> generateParams(Method method, Object[] args) {
+        if (!CommonUtils.isNotEmpty(args)) {
+            return null;
+        }
+
         Map<String, Object> params = new HashMap<>();
 
         Annotation[][] annotations = method.getParameterAnnotations();

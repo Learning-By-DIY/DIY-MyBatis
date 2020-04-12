@@ -1,7 +1,8 @@
-package com.lbd.batis.dao;
+package com.lbd.batis.mapper;
 
 import java.util.List;
 
+import com.lbd.batis.bean.User;
 import com.lbd.batis.annotation.Param;
 
 
