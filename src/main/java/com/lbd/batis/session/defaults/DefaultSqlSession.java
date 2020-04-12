@@ -2,6 +2,7 @@ package com.lbd.batis.session.defaults;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.lbd.batis.executor.Executor;
 import com.lbd.batis.executor.SimpleExecutor;
@@ -22,17 +23,17 @@ public class DefaultSqlSession implements SqlSession {
     }
 
     @Override
-    public <T> T selectOne(String statementId, Object parameter)
+    public <T> T selectOne(String statementId, Map<String, Object> parameter)
         throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         List<T> results = selectList(statementId, parameter);
         return CommonUtils.isNotEmpty(results) ? results.get(0) : null;
     }
 
     @Override
-    public <E> List<E> selectList(String statementId, Object parameter)
+    public <E> List<E> selectList(String statementId, Map<String, Object> parameter)
         throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         MappedStatement mappedStatement = this.configuration.getMappedStatement(statementId);
-        return executor.doQuery(mappedStatement, null);
+        return executor.doQuery(mappedStatement, parameter);
     }
 
     @Override

@@ -2,13 +2,14 @@ package com.lbd.batis.session;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 
 public interface SqlSession  {
-    <T> T selectOne(String statementId, Object parameter)
+    <T> T selectOne(String statementId, Map<String, Object> parameter)
         throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException;
 
-    <E> List<E> selectList(String statementId, Object parameter)
+    <E> List<E> selectList(String statementId, Map<String, Object> parameter)
         throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException;
 
     <T> T getMapper(Class<T> paramClass);
