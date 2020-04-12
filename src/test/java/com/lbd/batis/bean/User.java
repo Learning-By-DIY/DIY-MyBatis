@@ -1,4 +1,4 @@
-package com.lbd.batis.dao;
+package com.lbd.batis.bean;
 
 import lombok.Data;
 

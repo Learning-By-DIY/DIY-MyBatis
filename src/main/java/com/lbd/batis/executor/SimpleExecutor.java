@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 import com.lbd.batis.executor.Executor;
@@ -23,7 +23,7 @@ public class SimpleExecutor implements Executor {
 
     @Override
     public <E> List<E> doQuery(MappedStatement ms,
-                               HashMap<String, Object> parameter)
+                               Map<String, Object> parameter)
         throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Connection conn = null;
 

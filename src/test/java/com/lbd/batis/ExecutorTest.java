@@ -2,9 +2,10 @@ package com.lbd.batis;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
-import com.lbd.batis.dao.User;
+import com.lbd.batis.bean.User;
 import com.lbd.batis.executor.Executor;
 import com.lbd.batis.executor.SimpleExecutor;
 import com.lbd.batis.mapping.MappedStatement;
@@ -33,9 +34,9 @@ public class ExecutorTest extends BaseTest {
 
         MappedStatement ms = new MappedStatement();
         ms.setSql("select id, name, age, password from user where id = #{id}");
-        ms.setResultType("com.lbd.batis.dao.User");
+        ms.setResultType("com.lbd.batis.bean.User");
 
-        HashMap<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("id", "1");
 
         Executor executor = new SimpleExecutor();

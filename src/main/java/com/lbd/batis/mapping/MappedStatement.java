@@ -1,6 +1,7 @@
 package com.lbd.batis.mapping;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -40,7 +41,7 @@ public class MappedStatement {
     private SqlType sqlCommandType;
 
     @Getter
-    private HashMap<String, List<Integer>> params = new HashMap<>();
+    private Map<String, List<Integer>> params = new HashMap<>();
 
     public void setSql(String sql) {
         this.originSql = sql;
