@@ -54,7 +54,6 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
             break;
         }
 
-
         return result;
     }
 }
