@@ -2,7 +2,6 @@ package com.lbd.batis.binding;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
@@ -14,7 +13,6 @@ import com.lbd.batis.annotation.Param;
 import com.lbd.batis.mapping.MappedStatement;
 import com.lbd.batis.session.SqlSession;
 import com.lbd.batis.utils.CommonUtils;
-
 
 
 public class MapperProxy<T> implements InvocationHandler, Serializable {
