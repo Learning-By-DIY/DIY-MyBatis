@@ -12,4 +12,8 @@ public interface StatementHandler {
     ResultSet query(PreparedStatement preparedStatement) throws SQLException;
 
     boolean insert(PreparedStatement preparedStatement) throws SQLException;
+
+    boolean delete(PreparedStatement preparedStatement) throws SQLException;
+
+    int update(PreparedStatement preparedStatement) throws SQLException;
 }

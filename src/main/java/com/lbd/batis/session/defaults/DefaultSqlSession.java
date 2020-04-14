@@ -37,6 +37,24 @@ public class DefaultSqlSession implements SqlSession {
     }
 
     @Override
+    public boolean insert(String statementId, Map<String, Object> parameter) throws SQLException {
+        MappedStatement mappedStatement = this.configuration.getMappedStatement(statementId);
+        return executor.doInsert(mappedStatement, parameter);
+    }
+
+    @Override
+    public boolean delete(String statementId, Map<String, Object> parameter) throws SQLException {
+        MappedStatement mappedStatement = this.configuration.getMappedStatement(statementId);
+        return executor.doDelete(mappedStatement, parameter);
+    }
+
+    @Override
+    public int update(String statementId, Map<String, Object> parameter) throws SQLException {
+        MappedStatement mappedStatement = this.configuration.getMappedStatement(statementId);
+        return executor.doUpdate(mappedStatement, parameter);
+    }
+
+    @Override
     public <T> T getMapper(Class<T> type) {
         return configuration.getMapper(type, this);
     }

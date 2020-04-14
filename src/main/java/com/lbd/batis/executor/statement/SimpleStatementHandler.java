@@ -36,4 +36,14 @@ public class SimpleStatementHandler implements StatementHandler {
     public boolean insert(PreparedStatement preparedStatement) throws SQLException {
         return preparedStatement.execute();
     }
+
+    @Override
+    public boolean delete(PreparedStatement preparedStatement) throws SQLException {
+        return preparedStatement.execute();
+    }
+
+    @Override
+    public int update(PreparedStatement preparedStatement) throws SQLException {
+        return preparedStatement.executeUpdate();
+    }
 }

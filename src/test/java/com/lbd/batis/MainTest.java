@@ -59,6 +59,7 @@ public class MainTest extends BaseTest {
         Assertions.assertEquals(user.getPassword(), "12345678");
         Assertions.assertEquals(user.getAge(), 20);
 
+        // test selectAll
         MappedStatement statement2 = new MappedStatement();
         sqlId = namespace + "." + "getAll";
 
@@ -73,5 +74,20 @@ public class MainTest extends BaseTest {
         List<User> users = userMapper.getAll();
         Assertions.assertEquals(1, users.size());
         Assertions.assertEquals(user, users.get(0));
+
+        // test delete
+        /*
+        MappedStatement statementDelete = new MappedStatement();
+        sqlId = namespace + "." + "delete";
+
+        statementDelete.setSqlCommandType(SqlType.DELETE);
+        statementDelete.setSqlId(sqlId);
+        statementDelete.setNamespace(namespace);
+        statementDelete.setSql("delete from user where id = #{id}");
+        configuration.addMappedStatement(sqlId, statementDelete);
+
+        boolean deleteStatus = userMapper.delete("1");
+        Assertions.assertEquals(true, deleteStatus);
+        */
     }
 }

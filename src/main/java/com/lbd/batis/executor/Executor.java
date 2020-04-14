@@ -11,9 +11,9 @@ public interface Executor {
     <E> List<E> doQuery(MappedStatement ms, Map<String, Object> parameter)
         throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
-    boolean doInsert(MappedStatement ms, Map<String, Object> parameter);
+    boolean doInsert(MappedStatement ms, Map<String, Object> parameter) throws SQLException;
 
-    boolean doDelete(MappedStatement ms, Map<String, Object> parameter);
+    boolean doDelete(MappedStatement ms, Map<String, Object> parameter) throws SQLException;
 
-    int doUpdate(MappedStatement ms, Map<String, Object> parameter);
+    int doUpdate(MappedStatement ms, Map<String, Object> parameter) throws SQLException;
 }

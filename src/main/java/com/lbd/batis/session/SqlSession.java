@@ -12,6 +12,12 @@ public interface SqlSession  {
     <E> List<E> selectList(String statementId, Map<String, Object> parameter)
         throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException;
 
+    boolean insert(String statementId, Map<String, Object> parameter) throws SQLException;
+
+    boolean delete(String statementId, Map<String, Object> parameter) throws SQLException;
+
+    int update(String statementId, Map<String, Object> parameter) throws SQLException;
+
     <T> T getMapper(Class<T> paramClass);
 
     Configuration getConfiguration();

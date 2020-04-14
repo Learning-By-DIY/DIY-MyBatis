@@ -29,40 +29,63 @@ public class SimpleExecutor implements Executor {
 
         try {
             conn = JdbcUtil.getConnection();
-
             StatementHandler statementHandler = new SimpleStatementHandler(ms);
-
             PreparedStatement preparedStatement = statementHandler.prepare(conn);
-
             ParameterHandler parameterHandler = new DefaultParameterHandler(ms, parameter);
             parameterHandler.setParameters(preparedStatement);
-
             ResultSet resultSet = statementHandler.query(preparedStatement);
-
             ResultSetHandler resuSetHandler = new DefaultResultSetHandler(ms);
-
             return resuSetHandler.handleResultSets(resultSet);
         } finally {
             JdbcUtil.release(conn);
         }
     }
 
-    private boolean execute(MappedStatement ms, Map<String, Object> parameter) {
-        return true;
+    @Override
+    public boolean doInsert(MappedStatement ms, Map<String, Object> parameter)
+        throws SQLException {
+        Connection conn = null;
+        try {
+            conn = JdbcUtil.getConnection();
+            StatementHandler statementHandler = new SimpleStatementHandler(ms);
+            PreparedStatement preparedStatement = statementHandler.prepare(conn);
+            ParameterHandler parameterHandler = new DefaultParameterHandler(ms, parameter);
+            parameterHandler.setParameters(preparedStatement);
+            return statementHandler.insert(preparedStatement);
+        } finally {
+            JdbcUtil.release(conn);
+        }
     }
 
     @Override
-    public boolean doInsert(MappedStatement ms, Map<String, Object> parameter) {
-        return execute(ms, parameter);
+    public boolean doDelete(MappedStatement ms, Map<String, Object> parameter)
+        throws SQLException {
+        Connection conn = null;
+        try {
+            conn = JdbcUtil.getConnection();
+            StatementHandler statementHandler = new SimpleStatementHandler(ms);
+            PreparedStatement preparedStatement = statementHandler.prepare(conn);
+            ParameterHandler parameterHandler = new DefaultParameterHandler(ms, parameter);
+            parameterHandler.setParameters(preparedStatement);
+            return statementHandler.delete(preparedStatement);
+        } finally {
+            JdbcUtil.release(conn);
+        }
     }
 
     @Override
-    public boolean doDelete(MappedStatement ms, Map<String, Object> parameter) {
-        return execute(ms, parameter);
-    }
-
-    @Override
-    public int doUpdate(MappedStatement ms, Map<String, Object> parameter) {
-        return 0;
+    public int doUpdate(MappedStatement ms, Map<String, Object> parameter)
+        throws SQLException {
+        Connection conn = null;
+        try {
+            conn = JdbcUtil.getConnection();
+            StatementHandler statementHandler = new SimpleStatementHandler(ms);
+            PreparedStatement preparedStatement = statementHandler.prepare(conn);
+            ParameterHandler parameterHandler = new DefaultParameterHandler(ms, parameter);
+            parameterHandler.setParameters(preparedStatement);
+            return statementHandler.update(preparedStatement);
+        } finally {
+            JdbcUtil.release(conn);
+        }
     }
 }
