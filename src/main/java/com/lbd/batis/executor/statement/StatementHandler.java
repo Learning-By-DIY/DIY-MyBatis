@@ -10,4 +10,6 @@ public interface StatementHandler {
     PreparedStatement prepare(Connection connection) throws SQLException;
 
     ResultSet query(PreparedStatement preparedStatement) throws SQLException;
+
+    boolean insert(PreparedStatement preparedStatement) throws SQLException;
 }

@@ -46,4 +46,23 @@ public class SimpleExecutor implements Executor {
             JdbcUtil.release(conn);
         }
     }
+
+    private boolean execute(MappedStatement ms, Map<String, Object> parameter) {
+        return true;
+    }
+
+    @Override
+    public boolean doInsert(MappedStatement ms, Map<String, Object> parameter) {
+        return execute(ms, parameter);
+    }
+
+    @Override
+    public boolean doDelete(MappedStatement ms, Map<String, Object> parameter) {
+        return execute(ms, parameter);
+    }
+
+    @Override
+    public int doUpdate(MappedStatement ms, Map<String, Object> parameter) {
+        return 0;
+    }
 }

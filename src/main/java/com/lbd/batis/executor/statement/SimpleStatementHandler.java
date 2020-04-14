@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.lbd.batis.mapping.MappedStatement;
 import com.lbd.batis.utils.CommonUtils;
@@ -32,5 +30,10 @@ public class SimpleStatementHandler implements StatementHandler {
     @Override
     public ResultSet query(PreparedStatement preparedStatement) throws SQLException {
         return preparedStatement.executeQuery();
+    }
+
+    @Override
+    public boolean insert(PreparedStatement preparedStatement) throws SQLException {
+        return preparedStatement.execute();
     }
 }
