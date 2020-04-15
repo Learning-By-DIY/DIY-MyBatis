@@ -37,5 +37,7 @@ public class ExecutorTest extends BaseTest {
         Assertions.assertEquals("hanzejl", user.getName());
         Assertions.assertEquals(20, user.getAge());
         Assertions.assertEquals("12345678", user.getPassword());
+
+        this.clear();
     }
 }

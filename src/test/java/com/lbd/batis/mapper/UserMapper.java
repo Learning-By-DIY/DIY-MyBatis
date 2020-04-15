@@ -11,10 +11,10 @@ public interface UserMapper {
 
     List<User> getAll();
 
-    boolean delete(@Param("id") String id);
+    int delete(@Param("id") String id);
 
     int update(@Param("id") String id, @Param("name") String name);
 
-    boolean insert(@Param("id") String id, @Param("name") String name,
-                   @Param("password") String password, @Param("age") int age);
+    int insert(@Param("id") String id, @Param("name") String name,
+               @Param("password") String password, @Param("age") int age);
 }

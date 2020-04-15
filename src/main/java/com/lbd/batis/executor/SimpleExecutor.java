@@ -42,38 +42,6 @@ public class SimpleExecutor implements Executor {
     }
 
     @Override
-    public boolean doInsert(MappedStatement ms, Map<String, Object> parameter)
-        throws SQLException {
-        Connection conn = null;
-        try {
-            conn = JdbcUtil.getConnection();
-            StatementHandler statementHandler = new SimpleStatementHandler(ms);
-            PreparedStatement preparedStatement = statementHandler.prepare(conn);
-            ParameterHandler parameterHandler = new DefaultParameterHandler(ms, parameter);
-            parameterHandler.setParameters(preparedStatement);
-            return statementHandler.insert(preparedStatement);
-        } finally {
-            JdbcUtil.release(conn);
-        }
-    }
-
-    @Override
-    public boolean doDelete(MappedStatement ms, Map<String, Object> parameter)
-        throws SQLException {
-        Connection conn = null;
-        try {
-            conn = JdbcUtil.getConnection();
-            StatementHandler statementHandler = new SimpleStatementHandler(ms);
-            PreparedStatement preparedStatement = statementHandler.prepare(conn);
-            ParameterHandler parameterHandler = new DefaultParameterHandler(ms, parameter);
-            parameterHandler.setParameters(preparedStatement);
-            return statementHandler.delete(preparedStatement);
-        } finally {
-            JdbcUtil.release(conn);
-        }
-    }
-
-    @Override
     public int doUpdate(MappedStatement ms, Map<String, Object> parameter)
         throws SQLException {
         Connection conn = null;
