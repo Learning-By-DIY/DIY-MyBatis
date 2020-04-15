@@ -12,24 +12,11 @@ import com.lbd.batis.session.SqlSession;
 import com.lbd.batis.session.SqlSessionFactory;
 import com.lbd.batis.session.defaults.DefaultSqlSessionFactory;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 public class MainTest extends BaseTest {
-    @BeforeEach
-    public void init() throws SQLException {
-        super.init();
-        super.insertInit();
-    }
-
-    @AfterAll
-    public void destroy() {
-        super.destroy();
-    }
-
     @Test
     public void testSelect() throws ClassNotFoundException {
         Configuration configuration = new Configuration();
