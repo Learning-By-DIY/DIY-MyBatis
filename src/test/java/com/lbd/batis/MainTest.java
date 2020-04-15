@@ -12,31 +12,11 @@ import com.lbd.batis.session.SqlSession;
 import com.lbd.batis.session.SqlSessionFactory;
 import com.lbd.batis.session.defaults.DefaultSqlSessionFactory;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 public class MainTest extends BaseTest {
-    @BeforeAll
-    public void init() throws SQLException {
-        super.init();
-        super.insertInit();
-    }
-
-    @AfterEach
-    public void destroy() {
-        super.destroy();
-    }
-
-    @AfterAll
-    public void clear() throws SQLException {
-        super.clear();
-    }
-
     @Test
     public void testSelect() throws ClassNotFoundException {
         Configuration configuration = new Configuration();
@@ -83,6 +63,7 @@ public class MainTest extends BaseTest {
         Assertions.assertEquals(user, users.get(0));
     }
 
+    @Test
     public void testDelete() throws ClassNotFoundException {
         Configuration configuration = new Configuration();
 
@@ -95,6 +76,7 @@ public class MainTest extends BaseTest {
         statementDelete.setSqlId(sqlId);
         statementDelete.setNamespace(namespace);
         statementDelete.setSql("delete from user where id = #{id}");
+
         configuration.addMappedStatement(sqlId, statementDelete);
 
         configuration.addMapper(Class.forName(namespace));
