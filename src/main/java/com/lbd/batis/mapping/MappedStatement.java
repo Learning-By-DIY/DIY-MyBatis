@@ -48,7 +48,7 @@ public class MappedStatement {
 
         Matcher matcher = paramPattern.matcher(sql.trim());
 
-        for(int i = 1; matcher.find();) {
+        for(int i = 1; matcher.find(); ++i) {
             String name = matcher.group(1);
             List<Integer> indexes = params.getOrDefault(name, new ArrayList<>());
             indexes.add(i);
