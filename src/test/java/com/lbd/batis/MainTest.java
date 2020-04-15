@@ -132,6 +132,8 @@ public class MainTest extends BaseTest {
         statement.setNamespace(namespace);
         statement.setSql("select * from user where id = #{id}");
 
+        configuration.addMappedStatement(sqlId, statement);
+
         User user = userMapper.getUser("1");
 
         Assertions.assertEquals(user.getId(), 1);

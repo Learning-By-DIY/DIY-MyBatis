@@ -81,9 +81,6 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
         case UPDATE:
         case INSERT:
         case DELETE:
-            System.out.println(ms.getSqlCommandType());
-            System.out.println(params);
-            System.out.println(ms.getParams());
             result = sqlSession.update(statementId, params);
             break;
 
