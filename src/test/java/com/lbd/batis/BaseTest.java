@@ -26,6 +26,12 @@ public class BaseTest {
         psmt.execute();
     }
 
+    public void clear() throws SQLException {
+        String clearSql = "DROP TABLE INTO user";
+        PreparedStatement psmt = conn.prepareStatement(clearSql);
+        psmt.execute();
+    }
+
     public void destroy() {
         JdbcUtil.release(conn);
     }

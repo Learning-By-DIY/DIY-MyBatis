@@ -3,8 +3,8 @@ package com.lbd.batis;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.lbd.batis.constants.SqlType;
 import com.lbd.batis.bean.User;
+import com.lbd.batis.constants.SqlType;
 import com.lbd.batis.mapper.UserMapper;
 import com.lbd.batis.mapping.MappedStatement;
 import com.lbd.batis.session.Configuration;
@@ -13,21 +13,28 @@ import com.lbd.batis.session.SqlSessionFactory;
 import com.lbd.batis.session.defaults.DefaultSqlSessionFactory;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 public class MainTest extends BaseTest {
-    @BeforeEach
+    @BeforeAll
     public void init() throws SQLException {
         super.init();
         super.insertInit();
     }
 
-    @AfterAll
+    @AfterEach
     public void destroy() {
         super.destroy();
+    }
+
+    @AfterAll
+    public void clear() throws SQLException {
+        super.clear();
     }
 
     @Test
@@ -74,11 +81,15 @@ public class MainTest extends BaseTest {
         List<User> users = userMapper.getAll();
         Assertions.assertEquals(1, users.size());
         Assertions.assertEquals(user, users.get(0));
+    }
 
-        // test delete
-        /*
+    public void testDelete() throws ClassNotFoundException {
+        Configuration configuration = new Configuration();
+
+        String namespace = "com.lbd.batis.mapper.UserMapper";
+        String sqlId = namespace + "." + "delete";
+
         MappedStatement statementDelete = new MappedStatement();
-        sqlId = namespace + "." + "delete";
 
         statementDelete.setSqlCommandType(SqlType.DELETE);
         statementDelete.setSqlId(sqlId);
@@ -86,8 +97,14 @@ public class MainTest extends BaseTest {
         statementDelete.setSql("delete from user where id = #{id}");
         configuration.addMappedStatement(sqlId, statementDelete);
 
+        configuration.addMapper(Class.forName(namespace));
+
+        SqlSessionFactory factory = new DefaultSqlSessionFactory(configuration);
+        SqlSession session = factory.openSession();
+
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+
         boolean deleteStatus = userMapper.delete("1");
         Assertions.assertEquals(true, deleteStatus);
-        */
     }
 }
