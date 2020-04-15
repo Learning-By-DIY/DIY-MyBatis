@@ -31,4 +31,9 @@ public class SimpleStatementHandler implements StatementHandler {
     public ResultSet query(PreparedStatement preparedStatement) throws SQLException {
         return preparedStatement.executeQuery();
     }
+
+    @Override
+    public int update(PreparedStatement preparedStatement) throws SQLException {
+        return preparedStatement.executeUpdate();
+    }
 }

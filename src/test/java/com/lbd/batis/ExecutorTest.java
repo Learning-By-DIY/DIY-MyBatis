@@ -18,6 +18,7 @@ public class ExecutorTest extends BaseTest {
     @Test
     public void testQuery()
         throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        this.init();
 
         MappedStatement ms = new MappedStatement();
         ms.setSql("select id, name, age, password from user where id = #{id}");
@@ -36,5 +37,7 @@ public class ExecutorTest extends BaseTest {
         Assertions.assertEquals("hanzejl", user.getName());
         Assertions.assertEquals(20, user.getAge());
         Assertions.assertEquals("12345678", user.getPassword());
+
+        this.clear();
     }
 }

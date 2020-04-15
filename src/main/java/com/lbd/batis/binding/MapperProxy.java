@@ -78,6 +78,12 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
 
             break;
 
+        case UPDATE:
+        case INSERT:
+        case DELETE:
+            result = sqlSession.update(statementId, params);
+            break;
+
         default:
             break;
         }
