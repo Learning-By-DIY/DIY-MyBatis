@@ -10,24 +10,11 @@ import com.lbd.batis.executor.Executor;
 import com.lbd.batis.executor.SimpleExecutor;
 import com.lbd.batis.mapping.MappedStatement;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 public class ExecutorTest extends BaseTest {
-    @BeforeEach
-    public void init() throws SQLException {
-        super.init();
-        super.insertInit();
-    }
-
-    @AfterAll
-    public void destroy() {
-        super.destroy();
-    }
-
     @Test
     public void testQuery()
         throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
