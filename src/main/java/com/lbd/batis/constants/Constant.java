@@ -12,4 +12,9 @@ public interface Constant {
     String JDBC_USERNAME = "jdbc.username";
 
     String JDBC_PASSWORD = "jdbc.password";
+
+    // Mapper Path
+    String MAPPER_ANNOTATION_PATHS = "mapper.annotation.paths";
+
+    String MAPPER_XML_PATHS = "mapper.xml.paths";
 }
