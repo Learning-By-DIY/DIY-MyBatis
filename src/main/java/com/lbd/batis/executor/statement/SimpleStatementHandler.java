@@ -23,7 +23,7 @@ public class SimpleStatementHandler implements StatementHandler {
         if (CommonUtils.isNotEmpty(sql)) {
             return connection.prepareStatement(sql);
         } else {
-            throw new SQLException("original sql is numm");
+            throw new SQLException("original sql is: " + sql);
         }
     }
 
