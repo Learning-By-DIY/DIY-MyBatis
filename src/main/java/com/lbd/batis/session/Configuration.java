@@ -11,6 +11,7 @@ import com.lbd.batis.builder.BaseBuilder;
 import com.lbd.batis.builder.XmlBuilder;
 import com.lbd.batis.constants.Constant;
 import com.lbd.batis.mapping.MappedStatement;
+import com.lbd.batis.plugin.Interceptor;
 import com.lbd.batis.utils.PropUtil;
 
 import lombok.Getter;
@@ -26,10 +27,25 @@ public class Configuration {
 
     protected final Map<String, MappedStatement> mappedStatements = new HashMap<>();
 
-    public Configuration() throws ClassNotFoundException {
+    public Configuration() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         initMapperPaths();
 
         initBuilder();
+
+        initPlugins();
+    }
+
+    private void initPlugins() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        PropUtil prop = new PropUtil();
+
+        String pluginPaths = prop.getProperty(Constant.PLUGIN_PATH);
+        if (pluginPaths == null) {
+            return;
+        }
+
+        for (String pluginPath : pluginPaths.split(",")) {
+            Interceptor interceptor = (Interceptor) Class.forName(pluginPath).newInstance();
+        }
     }
 
     private void initBuilder() throws ClassNotFoundException {
