@@ -8,6 +8,7 @@ import com.lbd.batis.mapper.UserMapper;
 import com.lbd.batis.session.Configuration;
 import com.lbd.batis.session.SqlSession;
 import com.lbd.batis.session.SqlSessionFactory;
+import com.lbd.batis.session.SqlSessionFactoryBuilder;
 import com.lbd.batis.session.defaults.DefaultSqlSessionFactory;
 
 import org.junit.jupiter.api.Assertions;
@@ -19,9 +20,7 @@ public class MainTest extends BaseTest {
     public void testSelect() throws ClassNotFoundException {
         this.init();
 
-        Configuration configuration = new Configuration();
-
-        SqlSessionFactory factory = new DefaultSqlSessionFactory(configuration);
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build();
         SqlSession session = factory.openSession();
 
         UserMapper userMapper = session.getMapper(UserMapper.class);
@@ -44,9 +43,7 @@ public class MainTest extends BaseTest {
     public void testUpdate() throws ClassNotFoundException, SQLException {
         this.init();
 
-        Configuration configuration = new Configuration();
-
-        SqlSessionFactory factory = new DefaultSqlSessionFactory(configuration);
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build();
         SqlSession session = factory.openSession();
 
         UserMapper userMapper = session.getMapper(UserMapper.class);
