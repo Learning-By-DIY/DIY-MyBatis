@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="com.lbd.batis.mapper.UserMapper2">
+
+    <select id="getUser" resultType="com.lbd.batis.bean.User">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="getAll" resultType="com.lbd.batis.bean.User">
+        select * from user
+    </select>
+
+    <update id="update">
+      update user set name = #{name} where id = #{id}
+    </update>
+
+    <update id="delete">
+      delete from user where id = #{id}
+    </update>
+
+    <update id="insert">
+      insert into user (id, name, age, password) values (#{id}, #{name}, #{age}, #{password})
+    </update>
+
+</mapper>
