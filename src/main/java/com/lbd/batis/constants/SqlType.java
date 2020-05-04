@@ -17,4 +17,8 @@ public enum SqlType {
     public String value() {
         return this.value;
     }
+
+    public static SqlType getByValue(String value) {
+        return SqlType.valueOf(value.toUpperCase());
+    }
 }
