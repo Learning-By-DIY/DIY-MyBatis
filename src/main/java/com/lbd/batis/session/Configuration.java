@@ -10,8 +10,11 @@ import com.lbd.batis.builder.AnnotationBuilder;
 import com.lbd.batis.builder.BaseBuilder;
 import com.lbd.batis.builder.XmlBuilder;
 import com.lbd.batis.constants.Constant;
+import com.lbd.batis.executor.Executor;
+import com.lbd.batis.executor.SimpleExecutor;
 import com.lbd.batis.mapping.MappedStatement;
 import com.lbd.batis.plugin.Interceptor;
+import com.lbd.batis.plugin.InterceptorChain;
 import com.lbd.batis.utils.PropUtil;
 
 import lombok.Getter;
@@ -23,11 +26,13 @@ public class Configuration {
     @Getter
     private List<String> xmlMapperPaths = new ArrayList<>();
 
+    private InterceptorChain interceptorChain = new InterceptorChain();
+
     protected final MapperRegistry mapperRegistry = new MapperRegistry();
 
     protected final Map<String, MappedStatement> mappedStatements = new HashMap<>();
 
-    public Configuration() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public Configuration() throws ClassNotFoundException {
         initMapperPaths();
 
         initBuilder();
@@ -35,7 +40,7 @@ public class Configuration {
         initPlugins();
     }
 
-    private void initPlugins() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    private void initPlugins() throws ClassNotFoundException {
         PropUtil prop = new PropUtil();
 
         String pluginPaths = prop.getProperty(Constant.PLUGIN_PATH);
@@ -44,7 +49,12 @@ public class Configuration {
         }
 
         for (String pluginPath : pluginPaths.split(",")) {
-            Interceptor interceptor = (Interceptor) Class.forName(pluginPath).newInstance();
+            try {
+                Interceptor interceptor = (Interceptor) Class.forName(pluginPath).newInstance();
+                interceptorChain.addInterceptor(interceptor);
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -72,6 +82,16 @@ public class Configuration {
                 xmlMapperPaths.add(path);
             }
         }
+    }
+
+    public Executor newExecutor() {
+        Executor executor = new SimpleExecutor();
+
+        if (interceptorChain.hasPlugin()) {
+            executor = (Executor) interceptorChain.pluginAll(executor);
+        }
+
+        return executor;
     }
 
     public <T> void addMapper(Class<T> type) {
