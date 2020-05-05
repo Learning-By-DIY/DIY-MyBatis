@@ -9,6 +9,7 @@ import com.lbd.batis.constants.Constant;
 import com.lbd.batis.constants.SqlType;
 import com.lbd.batis.mapping.MappedStatement;
 import com.lbd.batis.session.Configuration;
+import com.lbd.batis.utils.CommonUtils;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -69,7 +70,7 @@ public class XmlBuilder extends BaseBuilder {
             String sqlId = namespace + "." + element.attributeValue(Constant.XML_ELEMENT_ID);
             statement.setSqlId(sqlId);
             statement.setNamespace(namespace);
-            statement.setSql(element.getStringValue());
+            statement.setSql(CommonUtils.stringTrim(element.getStringValue()));
 
             configuration.addMappedStatement(sqlId, statement);
         }
