@@ -9,6 +9,7 @@ import com.lbd.batis.plugin.Invocation;
 import com.lbd.batis.plugin.Plugin;
 
 
+@SuppressWarnings("unchecked")
 @AddOnes("doQuery")
 public class LogPlugin implements Interceptor {
 

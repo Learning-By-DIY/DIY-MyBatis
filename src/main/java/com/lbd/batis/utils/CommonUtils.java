@@ -20,4 +20,8 @@ public class CommonUtils {
     public static boolean isNotEmpty(Object[] objs) {
         return objs != null && objs.length > 0;
     }
+
+    public static String stringTrim(String src) {
+        return (src == null) ? null : src.trim();
+    }
 }
