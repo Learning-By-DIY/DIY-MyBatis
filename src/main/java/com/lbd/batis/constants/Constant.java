@@ -27,4 +27,7 @@ public interface Constant {
     String XML_SELECT_NAMESPACE = "namespace";
 
     String XML_SELECT_RESULTTYPE = "resultType";
+
+    // Plugin
+    String PLUGIN_PATH = "plugin.paths";
 }

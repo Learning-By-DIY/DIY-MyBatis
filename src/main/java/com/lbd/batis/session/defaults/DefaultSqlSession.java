@@ -19,7 +19,7 @@ public class DefaultSqlSession implements SqlSession {
 
     public DefaultSqlSession(Configuration configuration) {
         this.configuration = configuration;
-        this.executor = new SimpleExecutor();
+        this.executor = this.configuration.newExecutor();
     }
 
     @Override
