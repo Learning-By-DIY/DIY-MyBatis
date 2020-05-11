@@ -9,6 +9,8 @@ public interface Cache {
 
   Object removeObject(Object key);
 
+  boolean containsKey(Object key);
+
   void clear();
 
   int getSize();

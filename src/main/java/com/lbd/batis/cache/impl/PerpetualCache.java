@@ -16,6 +16,11 @@ public class PerpetualCache implements Cache {
     }
 
     @Override
+    public boolean containsKey(Object key) {
+        return cache.containsKey(key);
+    }
+
+    @Override
     public void putObject(Object key, Object value) {
         cache.put(key, value);
     }
