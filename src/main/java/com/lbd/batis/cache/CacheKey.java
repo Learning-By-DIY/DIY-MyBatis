@@ -1,5 +1,10 @@
 package com.lbd.batis.cache;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.lbd.batis.utils.ArrayUtil;
+
 
 public class CacheKey  {
     private static final int DEFAULT_HASHCODE = 17;
@@ -17,7 +22,7 @@ public class CacheKey  {
         this.count = 0;
         this.hashCode = DEFAULT_HASHCODE;
         this.multiplyer = DEFAULT_MULTIPLYER;
-        private List<Object> updateList;
+        updateList = new ArrayList<>();
     }
 
     public void update(Object object) {
@@ -26,7 +31,7 @@ public class CacheKey  {
         count++;
         baseHashCode *= count;
 
-        hashcode = multiplier * hashcode + baseHashCode;
+        hashCode = multiplyer * hashCode + baseHashCode;
 
         updateList.add(object);
     }
@@ -42,7 +47,7 @@ public class CacheKey  {
 
         final CacheKey cacheKey = (CacheKey) object;
 
-        if (hashcode != cacheKey.hashcode) {
+        if (hashCode != cacheKey.hashCode) {
             return false;
         }
         if (count != cacheKey.count) {

@@ -1,6 +1,7 @@
 package com.lbd.batis.executor;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -16,10 +17,22 @@ public class CachingExecutor implements Executor {
 
     private static Cache cache = new PerpetualCache();
 
+    public CachingExecutor(Executor executor) {
+        this.delegate = executor;
+    }
+
     private CacheKey generateCacheKey(MappedStatement ms, Map<String, Object> parameter) {
         CacheKey cacheKey = new CacheKey();
 
         cacheKey.update(ms.getOriginSql());
+
+        Object[] keys = parameter.keySet().toArray();
+        Arrays.sort(keys);
+
+        for (Object key: keys) {
+            cacheKey.update(key);
+            cacheKey.update(parameter.get(key));
+        }
 
         return cacheKey;
     }

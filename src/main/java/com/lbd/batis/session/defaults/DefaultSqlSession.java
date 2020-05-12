@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.lbd.batis.executor.Executor;
-import com.lbd.batis.executor.SimpleExecutor;
 import com.lbd.batis.mapping.MappedStatement;
 import com.lbd.batis.session.Configuration;
 import com.lbd.batis.session.SqlSession;

@@ -10,6 +10,7 @@ import com.lbd.batis.builder.AnnotationBuilder;
 import com.lbd.batis.builder.BaseBuilder;
 import com.lbd.batis.builder.XmlBuilder;
 import com.lbd.batis.constants.Constant;
+import com.lbd.batis.executor.CachingExecutor;
 import com.lbd.batis.executor.Executor;
 import com.lbd.batis.executor.SimpleExecutor;
 import com.lbd.batis.mapping.MappedStatement;
@@ -28,6 +29,8 @@ public class Configuration {
 
     private InterceptorChain interceptorChain = new InterceptorChain();
 
+    private Boolean cacheEnable = false;
+
     protected final MapperRegistry mapperRegistry = new MapperRegistry();
 
     protected final Map<String, MappedStatement> mappedStatements = new HashMap<>();
@@ -38,6 +41,11 @@ public class Configuration {
         initBuilder();
 
         initPlugins();
+    }
+
+    public Configuration(Boolean cacheEnable) throws ClassNotFoundException {
+        this();
+        this.cacheEnable = cacheEnable;
     }
 
     private void initPlugins() throws ClassNotFoundException {
@@ -85,7 +93,8 @@ public class Configuration {
     }
 
     public Executor newExecutor() {
-        Executor executor = new SimpleExecutor();
+        Executor executor = cacheEnable ? new CachingExecutor(new SimpleExecutor()) :
+            new SimpleExecutor();
 
         if (interceptorChain.hasPlugin()) {
             executor = (Executor) interceptorChain.pluginAll(executor);
