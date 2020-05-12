@@ -55,10 +55,14 @@ public class MainTest extends BaseTest {
         Assertions.assertEquals(user.getPassword(), "12345678");
         Assertions.assertEquals(user.getAge(), 20);
 
-        // test selectAll
-        List<User> users = userMapper.getAll();
-        Assertions.assertEquals(1, users.size());
-        Assertions.assertEquals(user, users.get(0));
+        User user2 = userMapper.getUser("1");
+        Assertions.assertEquals(user, user2);
+
+        int updateCount = userMapper.update("1", "zhangrong");
+        Assertions.assertEquals(1, updateCount);
+
+        User user3 = userMapper.getUser("1");
+        Assertions.assertEquals(user3.getName(), "zhangrong");
 
         this.clear();
     }

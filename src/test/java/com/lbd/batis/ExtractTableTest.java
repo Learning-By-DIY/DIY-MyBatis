@@ -27,5 +27,21 @@ public class ExtractTableTest {
         List<String> tables = CacheManage.extractTableName(statement, params);
         String table = tables.get(0);
         Assertions.assertEquals(table, "user");
+
+        statement.setSql("delete from user where id = #{id}");
+        statement.setSqlCommandType(SqlType.DELETE);
+        tables = CacheManage.extractTableName(statement, params);
+        Assertions.assertEquals("user", tables.get(0));
+
+        params.put("name", "hanzejl");
+        statement.setSql("update user set name = #{name} where id = #{id}");
+        statement.setSqlCommandType(SqlType.UPDATE);
+        Assertions.assertEquals("user", tables.get(0));
+
+        params.put("age", 20);
+        params.put("password", "12345678");
+        statement.setSql("insert into user (id, name, age, password) values (#{id}, #{name}, #{age}, #{password})");
+        statement.setSqlCommandType(SqlType.INSERT);
+        Assertions.assertEquals("user", tables.get(0));
     }
 }

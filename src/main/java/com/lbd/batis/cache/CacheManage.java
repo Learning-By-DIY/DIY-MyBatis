@@ -73,7 +73,13 @@ public class CacheManage {
     }
 
     public static List<String> extractTableName(MappedStatement ms, Map<String, Object> parameter) {
+        List<String> tables = new ArrayList<>();
+
         Pattern pattern = getPatternBySqlType(ms.getSqlCommandType());
+
+        if (pattern == null) {
+            return tables;
+        }
 
         String sql = ms.getOriginSql();
         for (Map.Entry<String, Object> entry: parameter.entrySet()) {
@@ -81,7 +87,6 @@ public class CacheManage {
         }
 
         Matcher matcher = pattern.matcher(sql);
-        List<String> tables = new ArrayList<>();
         while(matcher.find()) {
             tables.add(matcher.group(1).toLowerCase());
         }
