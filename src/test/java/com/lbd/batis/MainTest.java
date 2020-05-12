@@ -1,7 +1,9 @@
 package com.lbd.batis;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.lbd.batis.bean.User;
 import com.lbd.batis.mapper.UserMapper;
@@ -17,6 +19,29 @@ import org.junit.jupiter.api.Test;
 public class MainTest extends BaseTest {
     @Test
     public void testSelect() throws ClassNotFoundException {
+        this.init();
+
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build();
+        SqlSession session = factory.openSession();
+
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.getUser("1");
+
+        Assertions.assertEquals(user.getId(), 1);
+        Assertions.assertEquals(user.getName(), "hanzejl");
+        Assertions.assertEquals(user.getPassword(), "12345678");
+        Assertions.assertEquals(user.getAge(), 20);
+
+        // test selectAll
+        List<User> users = userMapper.getAll();
+        Assertions.assertEquals(1, users.size());
+        Assertions.assertEquals(user, users.get(0));
+
+        this.clear();
+    }
+
+    @Test
+    public void testCacheExecutor () throws ClassNotFoundException {
         this.init();
 
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build();
@@ -70,21 +95,18 @@ public class MainTest extends BaseTest {
     public void testSelect2() throws ClassNotFoundException {
         this.init();
 
-        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build();
+        Map<String, String> config = new HashMap<>();
+        config.put("cache.enable", "true");
+
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(config);
         SqlSession session = factory.openSession();
 
         UserMapper2 userMapper = session.getMapper(UserMapper2.class);
         User user = userMapper.getUser("1");
-
         Assertions.assertEquals(user.getId(), 1);
-        Assertions.assertEquals(user.getName(), "hanzejl");
-        Assertions.assertEquals(user.getPassword(), "12345678");
-        Assertions.assertEquals(user.getAge(), 20);
 
-        // test selectAll
-        List<User> users = userMapper.getAll();
-        Assertions.assertEquals(1, users.size());
-        Assertions.assertEquals(user, users.get(0));
+        User user2 = userMapper.getUser("1");
+        Assertions.assertEquals(user, user2);
 
         this.clear();
     }

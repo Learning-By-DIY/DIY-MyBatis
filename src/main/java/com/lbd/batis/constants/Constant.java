@@ -6,6 +6,8 @@ public interface Constant {
 
     String CONFIG_FILE_LOCATION = "/conf.properties";
 
+    String CACHE_ENABLE = "cache.enable";
+
     // JDBC
     String JDBC_DRIVER = "jdbc.driver";
 
